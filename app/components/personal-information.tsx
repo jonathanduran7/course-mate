@@ -15,6 +15,7 @@ export default function PersonalInformation() {
         initialValues={initialValues}
         onSubmit={(values) => {
           console.log(values);
+          handleNext()
         }}
         validationSchema={personalInformationSchema}
       >
@@ -70,7 +71,7 @@ export default function PersonalInformation() {
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleNext} disabled={!isValid}>
+                <Button type="submit" disabled={!isValid}>
                   Next
                 </Button>
               </Box>
