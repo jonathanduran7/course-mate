@@ -1,10 +1,13 @@
 'use client'
 import { Box, Button, Step, StepLabel, Stepper, Typography } from "@mui/material";
-import React from "react";
+import React, { createRef, useEffect } from "react";
 import PersonalInformation from "./components/personal-information";
 import CourseInformation from "./components/course-information";
 import MethodPayment from "./components/method-payment";
 import Summary from "./components/summary";
+import { useFormStore } from "./store/form.store";
+import { FormikProps } from "formik";
+import { useStepperStore } from "./store/stepper.store";
 
 const steps = ['Informacion Personal', 'Informacion del curso', 'Metodo de Pago', 'Confirmacion'];
 const stepsContent = [
@@ -27,19 +30,8 @@ const stepsContent = [
 ]
 
 export default function Home() {
-  const [activeStep, setActiveStep] = React.useState(0);
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  const { activeStep, handleReset } = useStepperStore();
 
   return (
     <div className="min-h-screen sm:p-20">
@@ -75,20 +67,6 @@ export default function Home() {
                 return <Component key={index} />;
               }
             })}
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
-            </Box>
           </div>
         )}
       </Box>
