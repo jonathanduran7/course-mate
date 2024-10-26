@@ -1,47 +1,44 @@
 'use client'
 import { Box, Button, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import React from "react";
+import PersonalInformation from "./components/personal-information";
+import CourseInformation from "./components/course-information";
+import MethodPayment from "./components/method-payment";
+import Summary from "./components/summary";
 
 const steps = ['Informacion Personal', 'Informacion del curso', 'Metodo de Pago', 'Confirmacion'];
+const stepsContent = [
+  {
+    step: 0,
+    component: PersonalInformation
+  },
+  {
+    step: 1,
+    component: CourseInformation
+  },
+  {
+    step: 2,
+    component: MethodPayment
+  },
+  {
+    step: 3,
+    component: Summary
+  }
+]
 
 export default function Home() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set<number>());
 
   const isStepOptional = (step: number) => {
     return step === 1;
   };
 
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
-
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
   };
 
   const handleReset = () => {
@@ -62,9 +59,6 @@ export default function Home() {
                 <Typography variant="caption">Optional</Typography>
               );
             }
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
             return (
               <Step key={label} {...stepProps}>
                 <StepLabel {...labelProps}>{label}</StepLabel>
@@ -84,7 +78,12 @@ export default function Home() {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+            {stepsContent.map((content, index) => {
+              if (content.step === activeStep) {
+                const Component = content.component;
+                return <Component key={index} />;
+              }
+            })}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"
@@ -95,11 +94,6 @@ export default function Home() {
                 Back
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
-              {isStepOptional(activeStep) && (
-                <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                  Skip
-                </Button>
-              )}
               <Button onClick={handleNext}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
