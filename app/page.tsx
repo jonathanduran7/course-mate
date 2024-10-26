@@ -29,10 +29,6 @@ const stepsContent = [
 export default function Home() {
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -49,7 +45,7 @@ export default function Home() {
     <div className="min-h-screen sm:p-20">
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
+          {steps.map((label) => {
             const stepProps: { completed?: boolean } = {};
             const labelProps: {
               optional?: React.ReactNode;

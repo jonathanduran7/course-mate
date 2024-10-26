@@ -1,6 +1,6 @@
 export default function PersonalInformation() {
   return (
-    <div>
+    <div className="border-red h-full" >
       Personal Infromation
     </div>
   )
