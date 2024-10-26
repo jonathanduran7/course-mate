@@ -1,7 +1,8 @@
-import { Formik, FormikProps } from "formik";
+import { Formik } from "formik";
 import { initialValues, personalInformationSchema } from "../schema/personal-information.schema";
 import { Box, Button } from "@mui/material";
 import { useStepperStore } from "../store/stepper.store";
+import InputCustom from "./input-custom";
 
 export default function PersonalInformation() {
 
@@ -17,61 +18,46 @@ export default function PersonalInformation() {
         }}
         validationSchema={personalInformationSchema}
       >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => {
+        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isValid }) => {
           return (
             <form onSubmit={handleSubmit} className="w-full flex flex-col items-center justify-between h-full">
               <div>
                 <div className="flex gap-7 mb-4">
-                  <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Name</label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      type="text"
-                      name="fullName"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.fullName}
-                    />
-                    {errors.fullName && touched.fullName && errors.fullName && <div className="text-[#f00] text-[12px]">{errors.fullName}</div>}
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      type="email"
-                      name="email"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
-                    />
-                    {errors.email && touched.email && errors.email && <div className="text-[#f00] text-[12px]">{errors.email}</div>}
-                  </div>
+                  <InputCustom
+                    label="First Name"
+                    name="fullName"
+                    value={values.fullName}
+                    error={errors?.fullName}
+                    touched={touched?.fullName}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur} />
+
+                  <InputCustom
+                    label="Correo"
+                    name="email"
+                    value={values.email}
+                    error={errors?.email}
+                    touched={touched?.email}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur} />
                 </div>
                 <div className="flex gap-7">
-                  <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">Phone</label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      type="text"
-                      name="phone"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.phone}
-                    />
-                    {errors.phone && touched.phone && errors.phone && <div className="text-[#f00] text-[12px]">{errors.phone}</div>}
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">Country</label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      type="text"
-                      name="country"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.country}
-                    />
-                    {errors.country && touched.country && errors.country && <div className="text-[#f00] text-[12px]">{errors.country}</div>}
-                  </div>
+                  <InputCustom
+                    label="Phone"
+                    name="phone"
+                    value={values.phone}
+                    error={errors?.phone}
+                    touched={touched?.phone}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur} />
+                  <InputCustom
+                    label="Pais"
+                    name="country"
+                    value={values.country}
+                    error={errors?.country}
+                    touched={touched?.country}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur} />
                 </div>
               </div>
               <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '100%' }}>
@@ -84,11 +70,10 @@ export default function PersonalInformation() {
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleNext}>
+                <Button onClick={handleNext} disabled={!isValid}>
                   Next
                 </Button>
               </Box>
-
             </form>
           )
         }}
