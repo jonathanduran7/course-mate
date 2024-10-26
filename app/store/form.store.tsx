@@ -7,5 +7,5 @@ export interface FormStore {
 
 export const useFormStore = create<FormStore>((set) => ({
   isFormValid: true,
-  setFormValid: (value: boolean) => set((state) => ({ isFormValid: value })),
+  setFormValid: (value) => set({ isFormValid: value }),
 }));
