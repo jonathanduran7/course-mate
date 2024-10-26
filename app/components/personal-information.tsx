@@ -3,10 +3,12 @@ import { initialValues, personalInformationSchema } from "../schema/personal-inf
 import { Box, Button } from "@mui/material";
 import { useStepperStore } from "../store/stepper.store";
 import InputCustom from "./input-custom";
+import { useFormStore } from "../store/form.store";
 
 export default function PersonalInformation() {
 
   const { handleNext, handleBack, activeStep } = useStepperStore();
+  const setPersonalInformation = useFormStore((state) => state.setPersonalInformation);
 
   return (
     <div className="h-full" >
@@ -14,7 +16,7 @@ export default function PersonalInformation() {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          console.log(values);
+          setPersonalInformation(values);
           handleNext()
         }}
         validationSchema={personalInformationSchema}

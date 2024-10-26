@@ -11,6 +11,8 @@ export interface FormStore {
   isFormValid: boolean;
   setFormValid: (value: boolean) => void;
   formData: FormData;
+  setPersonalInformation: (value: PersonalInformation) => void;
+  setCourseInformation: (value: CourseInformation) => void;
 }
 
 export const useFormStore = create<FormStore>((set) => ({
@@ -29,4 +31,6 @@ export const useFormStore = create<FormStore>((set) => ({
   },
   isFormValid: true,
   setFormValid: (value) => set({ isFormValid: value }),
+  setPersonalInformation: (value) => set((state) => ({ formData: { ...state.formData, personalInformation: value } })),
+  setCourseInformation: (value) => set((state) => ({ formData: { ...state.formData, courseInformation: value } })),
 }));
