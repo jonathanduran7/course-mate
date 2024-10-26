@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="min-h-screen sm:p-20">
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
@@ -54,11 +54,6 @@ export default function Home() {
             const labelProps: {
               optional?: React.ReactNode;
             } = {};
-            if (isStepOptional(index)) {
-              labelProps.optional = (
-                <Typography variant="caption">Optional</Typography>
-              );
-            }
             return (
               <Step key={label} {...stepProps}>
                 <StepLabel {...labelProps}>{label}</StepLabel>
@@ -77,7 +72,7 @@ export default function Home() {
             </Box>
           </React.Fragment>
         ) : (
-          <React.Fragment>
+          <div className="h-[510px] flex flex-col justify-between p-5">
             {stepsContent.map((content, index) => {
               if (content.step === activeStep) {
                 const Component = content.component;
@@ -98,7 +93,7 @@ export default function Home() {
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </Box>
-          </React.Fragment>
+          </div>
         )}
       </Box>
     </div>
