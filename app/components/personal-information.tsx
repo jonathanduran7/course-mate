@@ -9,17 +9,19 @@ export default function PersonalInformation() {
 
   const { handleNext, handleBack, activeStep } = useStepperStore();
   const setPersonalInformation = useFormStore((state) => state.setPersonalInformation);
+  const form = useFormStore((state) => state.formData);
 
   return (
     <div className="h-full" >
       Personal Infromation
       <Formik
-        initialValues={initialValues}
+        initialValues={form.personalInformation || initialValues}
         onSubmit={(values) => {
           setPersonalInformation(values);
           handleNext()
         }}
         validationSchema={personalInformationSchema}
+        enableReinitialize={true}
       >
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isValid }) => {
           return (
