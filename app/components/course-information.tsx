@@ -4,17 +4,16 @@ import { useStepperStore } from "../store/stepper.store"
 import { Box, Button } from "@mui/material"
 import InputCustom from "./input-custom"
 import { useFormStore } from "../store/form.store"
-import { ReactNode } from "react"
 
 export default function CourseInformation() {
   const { handleNext, handleBack, activeStep } = useStepperStore()
   const setCourseInformation = useFormStore((state) => state.setCourseInformation)
-  const form = useFormStore((state) => state.formData)
+  const { courseInformation } = useFormStore((state) => state.formData)
   return (
     <div className="h-full">
       Course Information
       <Formik
-        initialValues={initialValues}
+        initialValues={courseInformation || initialValues}
         onSubmit={(values) => {
           console.log(values)
           setCourseInformation(values)
