@@ -8,6 +8,6 @@ export const initialValues = {
 
 export const courseInformationSchema = yup.object({
   courseName: yup.string().required('El nombre del curso es requerido'),
-  modality: yup.mixed().oneOf(['presencial', 'virutal', 'hibrido'] as const).defined(),
+  modality: yup.mixed().oneOf(['presencial', 'virtual', 'hibrido'] as const).defined(),
   startDate: yup.date().default(() => new Date()),
 });
