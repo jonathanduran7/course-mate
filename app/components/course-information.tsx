@@ -4,20 +4,24 @@ import { useStepperStore } from "../store/stepper.store"
 import { Box, Button } from "@mui/material"
 import InputCustom from "./input-custom"
 import { useFormStore } from "../store/form.store"
+import { ReactNode } from "react"
 
 export default function CourseInformation() {
   const { handleNext, handleBack, activeStep } = useStepperStore()
   const setCourseInformation = useFormStore((state) => state.setCourseInformation)
+  const form = useFormStore((state) => state.formData)
   return (
     <div className="h-full">
       Course Information
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
+          console.log(values)
           setCourseInformation(values)
           handleNext()
         }}
         validationSchema={courseInformationSchema}
+        enableReinitialize={true}
       >
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isValid }) => {
           return (
@@ -42,12 +46,13 @@ export default function CourseInformation() {
                         onBlur={handleBlur}
                         value={values.modality}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        defaultValue="presencial"
                       >
+                        <option value="">Select Modality</option>
                         <option value="presencial">Presencial</option>
                         <option value="virtual">Virtual</option>
                         <option value="hibrido">Hibrido</option>
                       </select>
+                      {errors.modality && touched.modality && <div className="text-[#f00] text-[12px]">{errors.modality}</div>}
                     </div>
                   </div>
                 </div>
@@ -63,6 +68,7 @@ export default function CourseInformation() {
                       value={values.startDate}
                     />
                   </div>
+                  {errors.startDate && touched.startDate && <div className="text-[#f00] text-[12px]">{errors.startDate}</div>}
                 </div>
               </div>
               <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '100%' }}>

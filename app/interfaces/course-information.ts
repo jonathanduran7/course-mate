@@ -1,5 +1,5 @@
 export interface CourseInformation {
   courseName: string;
   modality: string;
-  startDate: Date;
+  startDate: Date | string;
 }

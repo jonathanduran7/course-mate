@@ -26,7 +26,7 @@ export const useFormStore = create<FormStore>((set) => ({
     courseInformation: {
       courseName: "",
       modality: "",
-      startDate: new Date(),
+      startDate: '',
     },
   },
   isFormValid: true,
