@@ -64,7 +64,7 @@ export default function CourseInformation() {
                       name="startDate"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.startDate}
+                      value={values.startDate as string}
                     />
                   </div>
                   {errors.startDate && touched.startDate && <div className="text-[#f00] text-[12px]">{errors.startDate}</div>}
