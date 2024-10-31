@@ -1,12 +1,12 @@
 import { Formik } from "formik"
 import { courseInformationSchema, initialValues } from "../schema/course-information.schema"
 import { useStepperStore } from "../store/stepper.store"
-import { Box, Button } from "@mui/material"
 import InputCustom from "./input-custom"
 import { useFormStore } from "../store/form.store"
+import ActionsButton from "./actions-button"
 
 export default function CourseInformation() {
-  const { handleNext, handleBack, activeStep } = useStepperStore()
+  const { handleNext } = useStepperStore()
   const setCourseInformation = useFormStore((state) => state.setCourseInformation)
   const { courseInformation } = useFormStore((state) => state.formData)
   return (
@@ -70,20 +70,7 @@ export default function CourseInformation() {
                   {errors.startDate && touched.startDate && <div className="text-[#f00] text-[12px]">{errors.startDate}</div>}
                 </div>
               </div>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '100%' }}>
-                <Button
-                  color="inherit"
-                  sx={{ mr: 1 }}
-                  onClick={handleBack}
-                  disabled={activeStep === 0}
-                >
-                  Back
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button type="submit" disabled={!isValid}>
-                  Next
-                </Button>
-              </Box>
+              <ActionsButton isValid={isValid} />
             </form>
           )
         }}

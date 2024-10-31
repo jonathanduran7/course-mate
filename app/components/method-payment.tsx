@@ -1,12 +1,12 @@
 import { Formik } from "formik";
 import { initialValues, methodPaymentSchema } from "../schema/payment-method";
-import { Box, Button } from "@mui/material";
 import { useStepperStore } from "../store/stepper.store";
 import InputCustom from "./input-custom";
 import { useFormStore } from "../store/form.store";
+import ActionsButton from "./actions-button";
 
 export default function MethodPayment() {
-  const { handleNext, handleBack, activeStep } = useStepperStore();
+  const { handleNext } = useStepperStore();
   const form = useFormStore((state) => state.formData);
   const setPaymentInformation = useFormStore((state) => state.setPaymentInformation);
   return (
@@ -121,20 +121,7 @@ export default function MethodPayment() {
                   </div>
                 )}
               </div>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '100%' }}>
-                <Button
-                  color="inherit"
-                  sx={{ mr: 1 }}
-                  onClick={handleBack}
-                  disabled={activeStep === 0}
-                >
-                  Back
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button type="submit" disabled={!isValid}>
-                  Next
-                </Button>
-              </Box>
+              <ActionsButton isValid={isValid} />
             </form>
           )
         }}
