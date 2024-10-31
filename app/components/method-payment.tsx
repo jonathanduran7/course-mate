@@ -10,7 +10,7 @@ export default function MethodPayment() {
   const form = useFormStore((state) => state.formData);
   const setPaymentInformation = useFormStore((state) => state.setPaymentInformation);
   return (
-    <div>
+    <div className="h-full">
       Metodo de pago
       <Formik
         initialValues={form.paymentInformation || initialValues}
@@ -41,7 +41,7 @@ export default function MethodPayment() {
                   {errors.methodPayment && touched.methodPayment && <div className="text-[#f00] text-[12px]">{errors.methodPayment}</div>}
                 </div>
 
-                {values.methodPayment === 'credit-card' && (
+                {values.methodPayment.includes('credit-card') && (
                   <>
                     <div className="flex gap-7 mb-4">
                       <InputCustom
@@ -86,7 +86,7 @@ export default function MethodPayment() {
                   </>
                 )}
 
-                {values.methodPayment === 'bank-transfer' && (
+                {values.methodPayment.includes('bank-transfer') && (
                   <div>
                     <InputCustom
                       label="Nombre del titular de la cuenta"
@@ -105,12 +105,10 @@ export default function MethodPayment() {
                       touched={touched?.bankInformation?.accountNumber}
                       handleChange={handleChange}
                       handleBlur={handleBlur} />
-
-                    {JSON.stringify(errors)}
                   </div>
                 )}
 
-                {values.methodPayment === 'paypal' && (
+                {values.methodPayment.includes('paypal') && (
                   <div>
                     <InputCustom
                       label="Email"
