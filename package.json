@@ -11,7 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/material": "^6.1.5",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/material": "^6.1.6",
     "formik": "^2.4.6",
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",

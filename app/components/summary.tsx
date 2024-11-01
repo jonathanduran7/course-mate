@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material"
 import { useFormStore } from "../store/form.store"
 import { useStepperStore } from "../store/stepper.store"
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function Summary() {
   const { personalInformation, courseInformation, paymentInformation } = useFormStore(state => state.formData)
@@ -10,7 +11,10 @@ export default function Summary() {
       <p className="font-bold text-4xl">Resumen</p>
 
       <div className="mt-2">
-        <p className="font-bold">Informacion Personal</p>
+        <div className="flex align-center">
+          <p className="font-bold">Informacion Personal</p>
+          <EditIcon sx={{ height: 20 }} />
+        </div>
         <div>
           <p>Nombre completo: {personalInformation.fullName}</p>
           <p>Correo: {personalInformation.email}</p>
@@ -20,7 +24,10 @@ export default function Summary() {
       </div>
 
       <div className="mt-2">
-        <p className="font-bold">Informacion del curso</p>
+        <div className="flex align-center">
+          <p className="font-bold">Informacion del curso</p>
+          <EditIcon sx={{ height: 20 }} />
+        </div>
         <div>
           <p>Nombre del curso: {courseInformation.courseName}</p>
           <p>Modalidad: {courseInformation.modality}</p>
@@ -29,7 +36,10 @@ export default function Summary() {
       </div>
 
       <div className="mt-2">
-        <p className="font-bold">Informacion del pago</p>
+        <div className="flex align-center">
+          <p className="font-bold">Informacion del pago</p>
+          <EditIcon sx={{ height: 20 }} />
+        </div>
         <div>
           <p>Metodo de pago: {paymentInformation.methodPayment}</p>
           {paymentInformation.methodPayment.includes('credit-card') && (
