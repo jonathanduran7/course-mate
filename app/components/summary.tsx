@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export default function Summary() {
   const { personalInformation, courseInformation, paymentInformation } = useFormStore(state => state.formData)
-  const { handleBack } = useStepperStore(state => state)
+  const { handleBack, changeStep } = useStepperStore(state => state)
   return (
     <div className="h-full">
       <p className="font-bold text-4xl">Resumen</p>
@@ -13,7 +13,7 @@ export default function Summary() {
       <div className="mt-2">
         <div className="flex align-center">
           <p className="font-bold">Informacion Personal</p>
-          <EditIcon sx={{ height: 20 }} />
+          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(0)} />
         </div>
         <div>
           <p>Nombre completo: {personalInformation.fullName}</p>
@@ -26,7 +26,7 @@ export default function Summary() {
       <div className="mt-2">
         <div className="flex align-center">
           <p className="font-bold">Informacion del curso</p>
-          <EditIcon sx={{ height: 20 }} />
+          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(1)} />
         </div>
         <div>
           <p>Nombre del curso: {courseInformation.courseName}</p>
@@ -38,7 +38,7 @@ export default function Summary() {
       <div className="mt-2">
         <div className="flex align-center">
           <p className="font-bold">Informacion del pago</p>
-          <EditIcon sx={{ height: 20 }} />
+          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(2)} />
         </div>
         <div>
           <p>Metodo de pago: {paymentInformation.methodPayment}</p>
