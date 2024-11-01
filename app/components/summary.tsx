@@ -1,13 +1,16 @@
+import { Box, Button } from "@mui/material"
 import { useFormStore } from "../store/form.store"
+import { useStepperStore } from "../store/stepper.store"
 
 export default function Summary() {
   const { personalInformation, courseInformation, paymentInformation } = useFormStore(state => state.formData)
+  const { handleBack } = useStepperStore(state => state)
   return (
     <div className="h-full">
-      Summary
+      <p className="font-bold text-4xl">Resumen</p>
 
       <div className="mt-2">
-        <p>Informacion Personal</p>
+        <p className="font-bold">Informacion Personal</p>
         <div>
           <p>Nombre completo: {personalInformation.fullName}</p>
           <p>Correo: {personalInformation.email}</p>
@@ -17,7 +20,7 @@ export default function Summary() {
       </div>
 
       <div className="mt-2">
-        <p>Informacion del curso</p>
+        <p className="font-bold">Informacion del curso</p>
         <div>
           <p>Nombre del curso: {courseInformation.courseName}</p>
           <p>Modalidad: {courseInformation.modality}</p>
@@ -26,7 +29,7 @@ export default function Summary() {
       </div>
 
       <div className="mt-2">
-        <p>Informacion del pago</p>
+        <p className="font-bold">Informacion del pago</p>
         <div>
           <p>Metodo de pago: {paymentInformation.methodPayment}</p>
           {paymentInformation.methodPayment.includes('credit-card') && (
@@ -52,6 +55,21 @@ export default function Summary() {
           )}
         </div>
       </div>
+
+      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '100%' }}>
+        <Button
+          color="inherit"
+          sx={{ mr: 1 }}
+          onClick={handleBack}
+        >
+          Back
+        </Button>
+
+        <Box sx={{ flex: '1 1 auto' }} />
+        <Button>
+          Next
+        </Button>
+      </Box>
     </div>
   )
 }
