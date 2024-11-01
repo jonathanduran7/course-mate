@@ -5,6 +5,7 @@ export interface StepperStore {
   handleNext: () => void;
   handleBack: () => void;
   handleReset: () => void;
+  changeStep: (step: number) => void;
 }
 
 export const useStepperStore = create<StepperStore>((set) => ({
@@ -12,4 +13,5 @@ export const useStepperStore = create<StepperStore>((set) => ({
   handleNext: () => set((state) => ({ activeStep: state.activeStep + 1 })),
   handleBack: () => set((state) => ({ activeStep: state.activeStep - 1 })),
   handleReset: () => set({ activeStep: 0 }),
+  changeStep: (step) => set({ activeStep: step }),
 }));
