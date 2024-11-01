@@ -2,6 +2,7 @@ import { Box, Button } from "@mui/material"
 import { useFormStore } from "../store/form.store"
 import { useStepperStore } from "../store/stepper.store"
 import EditIcon from '@mui/icons-material/Edit';
+import { Step } from "../enums/step.enum";
 
 export default function Summary() {
   const { personalInformation, courseInformation, paymentInformation } = useFormStore(state => state.formData)
@@ -13,7 +14,7 @@ export default function Summary() {
       <div className="mt-2">
         <div className="flex align-center">
           <p className="font-bold">Informacion Personal</p>
-          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(0)} />
+          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(Step.PERSONAL_INFORMATION)} />
         </div>
         <div>
           <p>Nombre completo: {personalInformation.fullName}</p>
@@ -26,7 +27,7 @@ export default function Summary() {
       <div className="mt-2">
         <div className="flex align-center">
           <p className="font-bold">Informacion del curso</p>
-          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(1)} />
+          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(Step.COURSE_INFORMATION)} />
         </div>
         <div>
           <p>Nombre del curso: {courseInformation.courseName}</p>
@@ -38,7 +39,7 @@ export default function Summary() {
       <div className="mt-2">
         <div className="flex align-center">
           <p className="font-bold">Informacion del pago</p>
-          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(2)} />
+          <EditIcon sx={{ height: 20, cursor: 'pointer' }} onClick={() => changeStep(Step.PAYMENT_INFORMATION)} />
         </div>
         <div>
           <p>Metodo de pago: {paymentInformation.methodPayment}</p>

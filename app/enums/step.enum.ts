@@ -1,0 +1,6 @@
+export enum Step {
+  PERSONAL_INFORMATION = 0,
+  COURSE_INFORMATION = 1,
+  PAYMENT_INFORMATION = 2,
+}
+
